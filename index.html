@@ -93,6 +93,27 @@
 </ul>
 
 <h1>Welcome to our Shop</h1>
+<h1>Login</h1>
+<form method="POST" action="login.php">
+    <div class="form-group">
+        <input type="email" name="email" placeholder="Email" required>
+    </div>
+    <div class="form-group">
+        <input type="password" name="password" placeholder="Password" required>
+    </div>
+    <div class="form-group">
+        <select name="role" required>
+            <option value="" disabled selected>Select Role</option>
+            <option value="user">User</option>
+            <option value="admin">Admin</option>
+        </select>
+    </div>
+    <button type="submit" class="btn">Login</button>
+</form>
+
+<div class="links">
+    <button class="btn" onclick="location.href='register.html'">Register</button>
+</div>
 <img src="babyshop.jpg" style="width:1500px;height:500px;">
 
 </body>
