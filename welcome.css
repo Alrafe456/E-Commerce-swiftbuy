@@ -1,0 +1,130 @@
+/* General reset for body, headings, and paragraphs */
+body, h1, h2, p {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Welcome Page Container */
+.welcome-container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Heading styles for the Welcome page */
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 1.8em;
+    margin: 20px 0 10px;
+}
+
+/* Paragraph styles */
+p {
+    margin-bottom: 20px;
+    font-size: 1.1em;
+}
+
+/* Options or links below the welcome message */
+.options {
+    margin: 20px 0;
+}
+
+.options a {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1em;
+    color: white;
+    background-color: #007BFF; /* Main button color */
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.options a:hover {
+    background-color: #0056b3; /* Darker shade for hover effect */
+}
+
+/* Navbar styles */
+.navbar {
+    background-color: #007BFF; /* Navbar background color */
+    padding: 10px 20px;
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-logo {
+    color: white;
+    font-size: 1.5em;
+    text-decoration: none;
+}
+
+.navbar-menu {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.navbar-menu li {
+    display: inline;
+}
+
+.navbar-menu a {
+    color: white;
+    text-decoration: none;
+    font-size: 1em;
+    transition: color 0.3s ease;
+}
+
+.navbar-menu a:hover {
+    color: #0056b3; /* Darker shade for hover effect */
+}
+
+/* Responsive styling */
+@media (max-width: 600px) {
+    .welcome-container {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
+
+    .options a {
+        padding: 8px 16px;
+        font-size: 0.9em;
+    }
+
+    .navbar-container {
+        flex-direction: column; /* Stack items vertically */
+        align-items: center;
+    }
+
+    .navbar-menu {
+        flex-direction: column; /* Stack navbar items vertically */
+        gap: 10px;
+    }
+}
