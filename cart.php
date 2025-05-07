@@ -6,13 +6,13 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-// Include the database configuration file
+
 include 'db_config.php';
 $user_id = $_SESSION['user_id'];
 $payment_method = '';
 $address = '';
 
-// Handle item deletion from the cart
+
 if (isset($_GET['id'])) {
     $id = intval($_GET['id']);
     $stmt = $conn->prepare("DELETE FROM cart WHERE id = ?");
@@ -27,7 +27,7 @@ if (isset($_GET['id'])) {
     $stmt->close();
 }
 
-// Handle clearing the cart
+
 if (isset($_GET['action']) && $_GET['action'] === 'clear') {
     $sql = "DELETE FROM cart WHERE user_id = ?";
     $stmt = $conn->prepare($sql);
@@ -42,12 +42,12 @@ if (isset($_GET['action']) && $_GET['action'] === 'clear') {
     $stmt->close();
 }
 
-// Handle update quantity process (POST request)
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_quantity'])) {
     $id = intval($_POST['id']);
     $quantity = intval($_POST['quantity']);
 
-    // Ensure the quantity is a valid number
+    
     if ($quantity > 0) {
         $stmt = $conn->prepare("UPDATE cart SET quantity = ? WHERE id = ?");
         $stmt->bind_param("ii", $quantity, $id);
@@ -64,23 +64,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_quantity'])) {
     }
 }
 
-// Handle checkout process (POST request)
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $payment_method = $_POST['payment_method'];
     $address = $_POST['address']; 
     
-    // Calculate total
+    
     $total = 0;
     $product_details = [];
 
-    // Fetch cart products
+    
     $sql = "SELECT * FROM cart WHERE user_id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $user_id);
     $stmt->execute();
     $result = $stmt->get_result();
 
-    // Store product details and calculate total
+  
     while ($row = $result->fetch_assoc()) {
         $total += $row['product_price'] * $row['quantity'];
         $product_details[] = [
