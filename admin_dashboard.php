@@ -2,13 +2,13 @@
 // Start the session
 session_start();
 
-// Check if the user is logged in and is an admin
+
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
     header("Location: login.php");
     exit();
 }
 
-// Fetch user information from the database
+
 include 'db_config.php';
 $user_id = $_SESSION['user_id'];
 $stmt = $conn->prepare("SELECT full_name, email FROM users WHERE id = ?");
@@ -17,11 +17,11 @@ $stmt->execute();
 $result = $stmt->get_result();
 $user = $result->fetch_assoc();
 
-// Handle product deletion
+
 if (isset($_GET['delete_id'])) {
     $delete_id = intval($_GET['delete_id']);
 
-    // Delete product from the database
+    
     $stmt = $conn->prepare("DELETE FROM products WHERE id = ?");
     $stmt->bind_param("i", $delete_id);
 
@@ -35,25 +35,25 @@ if (isset($_GET['delete_id'])) {
     $stmt->close();
 }
 
-// Handle product upload form submission
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['upload_product'])) {
     $product_name = htmlspecialchars($_POST['product_name']);
     $price = htmlspecialchars($_POST['price']);
     $description = htmlspecialchars($_POST['description']);
     $stock = intval($_POST['stock']);
     
-    // Handle image upload
+    
     if (!empty($_FILES['image']['name'])) {
         $target_dir = "product_images/";
         $target_file = $target_dir . basename($_FILES["image"]["name"]);
         
-        // Check if file is a valid image
+        
         $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
         $allowedTypes = ['jpg', 'jpeg', 'png', 'gif'];
 
         if (in_array($imageFileType, $allowedTypes)) {
             if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
-                // Insert product into the database
+                
                 $stmt = $conn->prepare("INSERT INTO products (name, description, price, stock, image) VALUES (?, ?, ?, ?, ?)");
                 $stmt->bind_param("ssdss", $product_name, $description, $price, $stock, $target_file);
 
