@@ -1,26 +1,24 @@
-version: '3.8'
-
 services:
-  app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+  web:
+    build: .
     ports:
-      - "8080:80"  # Map port 8080 on the host to port 80 in the container
+      - "8080:80"
     volumes:
-      - .:/var/www/html  # Mount the current directory to the container
+      - ./:/var/www/html/
+    depends_on:
+      - db
     environment:
-      - MYSQL_HOST=db
-      - MYSQL_DATABASE=shop_db
-      - MYSQL_USER=root
-      - MYSQL_PASSWORD=
+      APACHE_RUN_USER: www-data
+      APACHE_RUN_GROUP: www-data
 
   db:
-    image: mysql:5.7
+    image: mysql:8.0
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: ""
-      MYSQL_DATABASE: shop_db
+      MYSQL_ROOT_PASSWORD: rootpassword123
+      MYSQL_DATABASE: swiftbuy
+      MYSQL_USER: user
+      MYSQL_PASSWORD: userpassword123
     volumes:
       - db_data:/var/lib/mysql
 
