@@ -2,7 +2,7 @@
 // Start the session to manage access control
 session_start();
 
-// Check if the user is logged in and is the superuser (root)
+
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
     header("Location: login.php");  // Redirect if the user is not logged in or not a superuser
     exit();
